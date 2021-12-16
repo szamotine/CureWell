@@ -1,0 +1,101 @@
+<div class="myContent">
+  <div class="container">
+    
+    <h2 align="justify" style="color:brown">Update Surgery</h2>
+    <!--Add angular form logic here-->
+    <form #updateSurgeryForm (ngSubmit)="editSurgery(starttime.value,endtime.value )" >
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="col" style="text-align:left">
+              <label>Surgery Id</label>
+            </div>
+            <div class="col; input-group">
+              <!--Add angular form logic here-->
+              <input type="text" name="surgeryId" class="form-control qkinput" id="surgeryID" #surId="ngModel" [(ngModel)]="surgeryId" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col" style="text-align:left">
+              <label>Doctor Id</label>
+            </div>
+            <div class="col; input-group">
+              <!--Add angular form logic here-->
+              <input type="text" name="doctorId" class="form-control qkinput" id="doctorID" #docId="ngModel" [(ngModel)]="doctorId" readonly>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col" style="text-align:left">
+              <label>Surgery Date</label>
+            </div>
+            <div class="col; input-group">
+              <!--Add angular form logic here-->
+              <input type="text" name="surgeryDate" class="form-control qkinput" id="surgeryDate" #surgDate="ngModel" [(ngModel)]="surgeryDate" readonly>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col" style="text-align:left">
+              <label>Start Time(24 Hours Format)</label>
+            </div>
+            <div class="col; input-group">
+              <!--Add angular form logic here-->
+              <input type="number" name="starttime" class="form-control qkinput" id="starttime" #starttime="ngModel" [ngModel]="startTime" min="0" max="24" required style="width:160px">
+              <!--Add angular validation logic here-->
+              <div *ngIf="starttime.errors && (starttime.errors.min || starttime.errors.max)">
+                Please enter a number between 0-24
+              </div>
+              <div *ngIf="starttime.errors && !(starttime.errors.min || starttime.errors.max)">
+                Start Time is required
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col" style="text-align:left">
+              <label>End Time(24 Hours Format)</label>
+            </div>
+            <div class="col; input-group">
+              <!--Add angular form logic here-->
+              <input type="number" name="endtime" class="form-control qkinput" id="endtime" #endtime="ngModel" [ngModel]="endTime"
+                     in="0" max="24" required>
+              <!--Add angular validation logic here-->
+              <div *ngIf="endtime.errors && (endtime.dirty || endtime.touched)" class="text-danger-validation">
+                <div [hidden]="!(endtime.errors['required'])" style="color:red">
+                  <br />
+                  End Time is required
+                </div >
+              </div>
+              <div *ngIf="checkEndTime(starttime.value, endtime.value) && !endtime.errors" style="color:red">
+                <br />
+                Please enter End Time that is later than Start Time
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col" style="text-align:left">
+              <label>Surgery Category</label>
+            </div>
+            <div class="col; input-group">
+              <!--Add angular form logic here-->
+              <input type="text" name="surgeryCategory" class="form-control qkinput" id="surgeryCategory" #surgCategory="ngModel" [(ngModel)]="surgeryCategory" readonly>
+            </div>
+          </div>
+
+          <div class="form-group" style="text-align:left">
+            <button type="submit" [disabled]="!updateSurgeryForm.form.valid" class="btn">Update</button> &nbsp;&nbsp;
+            <a routerLink="/viewTodaySurgery">Cancel</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
